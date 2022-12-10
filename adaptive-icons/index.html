@@ -10,6 +10,7 @@
 		svg {
 			aspect-ratio: 1;
 			height: calc(var(--icon-height, 24) * 1px);
+			--stroke-width: calc(var(--icon-height, 24) / 16 + 0.5);
 		}
 
 		/* demo styles */
@@ -58,6 +59,39 @@
 				</dd>
 			</dl>
 		</li>
+		<li>
+			<h3>Regular</h3>
+			<dl>
+				<dt>24--Arrow-Right--Filled.svg</dt>
+				<dd>
+					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+						<use href="regular/Illustrator/24--Arrow-Right--Filled.svg#filled">
+						</use>
+					</svg>
+				</dd>
+				<dt>24--Arrow-Right--Outlined.svg</dt>
+				<dd>
+					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+						<use href="regular/Illustrator/24--Arrow-Right--Outlined.svg#outlined">
+						</use>
+					</svg>
+				</dd>
+				<dt>24--Bug--Filled.svg</dt>
+				<dd>
+					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+						<use href="regular/Illustrator/24--Bug--Filled.svg#filled">
+						</use>
+					</svg>
+				</dd>
+				<dt>24--Bug--Outlined.svg</dt>
+				<dd>
+					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+						<use href="regular/Illustrator/24--Bug--Outlined.svg#outlined">
+						</use>
+					</svg>
+				</dd>
+			</dl>
+		</li>
 	</ol>
 
 	<h2>Sketch</h2>
@@ -92,13 +126,49 @@
 				</dd>
 			</dl>
 		</li>
+		<li>
+			<h3>Regular</h3>
+			<dl>
+				<dt>24--Arrow-Right--Filled.svg</dt>
+				<dd>
+					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+						<use href="regular/Sketch/24--Arrow-Right--Filled.svg#3"></use>
+					</svg>
+				</dd>
+				<dt>24--Arrow-Right--Outlined.svg</dt>
+				<dd>
+					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+						<use href="regular/Sketch/24--Arrow-Right--Outlined.svg#3">
+						</use>
+					</svg>
+				</dd>
+				<dt>24--Bug--Filled.svg</dt>
+				<dd>
+					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+						<use href="regular/Sketch/24--Bug--Filled.svg#3"></use>
+					</svg>
+				</dd>
+				<dt>24--Bug--Outlined.svg</dt>
+				<dd>
+					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+						<use href="regular/Sketch/24--Bug--Outlined.svg#3"></use>
+					</svg>
+				</dd>
+			</dl>
+		</li>
 	</ol>
 
 	<dl>
 		<dt>Original</dt>
 		<dd>Original image, only manipulated by removing <code>width</code> and <code>height</code> attributes from
 			within the SVG file. So those are scaling linear and even also don't have the
-			<code>vector-effect="non-scaling-stroke"</code>-attribute defined within.</dd>
+			<code>vector-effect="non-scaling-stroke"</code>-attribute defined within.
+		</dd>
+		<dt>Regular</dt>
+		<dd>Same as <i>original</i>, but additionally with the dynamic stroke-width
+			(<code>stroke-width: var(--stroke-width, 2)</code>) and attribute
+			<code>vector-effect="non-scaling-stroke"</code> defined within the SVG files.
+		</dd>
 	</dl>
 </body>
 
