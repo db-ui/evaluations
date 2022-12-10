@@ -388,22 +388,22 @@
 
 	<dl>
 		<dt>Original</dt>
-		<dd>Original image, only manipulated by removing <code>width</code> and <code>height</code> attributes from
+		<dd>Original image, only manipulated by removing <code class="language-html">width</code> and <code class="language-html">height</code> attributes from
 			within the SVG file. So those are scaling linear and even also don't have the
-			<code>vector-effect="non-scaling-stroke"</code>-attribute defined within.
+			<code class="language-html">vector-effect="non-scaling-stroke"</code>-attribute defined within.
 		</dd>
 		<dt>Regular</dt>
 		<dd>Same as <i>original</i>, but additionally with the dynamic stroke-width
-			(<code>stroke-width: var(--stroke-width, 2)</code>) and attribute
-			<code>vector-effect="non-scaling-stroke"</code> defined within the SVG files.
+			(<code class="language-css">stroke-width: var(--stroke-width, 2)</code>) and attribute
+			<code class="language-html">vector-effect="non-scaling-stroke"</code> defined within the SVG files.
 		</dd>
 		<dt>Regular - stroke to fill</dt>
-		<dd>Same as <i>Regular</i>, additionally converted <code>stroke</code> to <code>fill</code>.</dd>
+		<dd>Same as <i>Regular</i>, additionally converted <i>stroke</i> to <i>fill</i>.</dd>
 		<dt>Optimized</dt>
 		<dd>Same as <i>Regular</i>, but additionally run through <a href="https://imageoptim.com/mac" target="_blank"
 				rel="noreferrer noopener">ImageOptim</a>.</dd>
 		<dt>Optimized - stroke to fill</dt>
-		<dd>Same as <i>Optimized</i>, additionally converted <code>stroke</code> to <code>fill</code>.</dd>
+		<dd>Same as <i>Optimized</i>, additionally converted <i>stroke</i> to <i>fill</i>.</dd>
 	</dl>
 
 	<script>
