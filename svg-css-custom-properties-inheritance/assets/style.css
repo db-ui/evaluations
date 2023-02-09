@@ -1,0 +1,30 @@
+:root {
+    --testURL: url("powercar-controlcar-regular.svg#powercar-controlcar");
+    --strokeColor: red;
+    color: blue;
+}
+
+.elm-icon {
+    color: inherit;
+}
+
+div {
+    width: 84px;
+    height: 44px;
+}
+
+svg use::before {
+    content: var(--testURL);
+}
+
+.background-image {
+    background-image: var(--testURL);
+    background-repeat: no-repeat;
+}
+.pseudo-element::before {
+    content: var(--testURL);
+}
+
+.base64 {
+    --testURL: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODQiIGhlaWdodD0iNDQiIHZpZXdCb3g9IjAgMCA4NCA0NCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnIGlkPSJwb3dlcmNhci1jb250cm9sY2FyIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48ZyBmaWxsPSIjRkZGRkZGIiBzdHJva2U9IiM2NDY5NzMiIHN0eWxlPSJmaWxsOiBjdXJyZW50Q29sb3IiPjxwYXRoIGQ9Ik04My41LDAuNTAwMDMyMTQ1IEw4My41LDQzLjUgTDQuNTgyNzY5MjcsNDMuNSBDMy43NDcyOTc5NSw0My41IDMuMDUzNTExNjUsNDMuMjg1ODM2NiAyLjQ5MjAyMTM2LDQyLjkxMTYyNTcgQzEuODYxMjMxMjcsNDIuNDkxMjI5MiAxLjM5OTUwNTI2LDQxLjg3MzYxNTkgMS4wNzkyNTU4NSw0MS4xNTY4NDAzIEMwLjI3NTU5NTcyOCwzOS4zNTgxMDQ4IDAuMzQ3OTE2MzM5LDM2Ljk0MjYwNzkgMS4wMjgxMTQyNCwzNS4xODAwMTQ1IEMyLjMxODc1ODIxLDMxLjgzNTU3NTIgMTAuMzQzODQxNywyMS41NTQ1ODc4IDE5Ljk2MDQxMjIsMTQuNDAxMTc4NyBDMjkuNjA5MTY5MSw3LjIyMzgyNzM4IDM2LjU1NDQyODksNC4wMTE4NTU4OCA0MC45MzI0MTA4LDIuNDc0NTYzNDMgQzQ2Ljk4NjgyNDEsMC43ODE0ODQ1MzUgNTUuOTg0NTcwMSwwLjUyNTIwMjE3OCA1Ni44MTE5ODk0LDAuNTAxNzQ3ODc5IEw1Ni44MTE5ODk0LDAuNTAxNzQ3ODc5IEw4My41LDAuNTAwMDMyMTQ1IFoiPjwvcGF0aD48L2c+PC9nPjwvc3ZnPgo=")
+}
