@@ -12,7 +12,66 @@
 		svg {
 			width: auto;
 			height: calc(var(--icon-height, 24) * 1px);
+		}
+
+		:root {
 			--stroke-width: calc((var(--icon-height, 24) / 16 + 0.5) * 24 / var(--icon-height, 24));
+			--icon-stroke: calc(var(--stroke-width) * 1px);
+		}
+
+		/* icon font styles */
+		@font-face {
+			font-family: 'icon-font';
+			src:
+				url('icon-font/icomoon-outline.woff2') format('woff2'),
+				url('icon-font/icomoon-outline.woff') format('woff');
+			font-weight: 400;
+			font-style: normal;
+			font-display: block;
+		}
+		@font-face {
+			font-family: 'icon-font';
+			src:
+				url('icon-font/icomoon-solid.woff2') format('woff2'),
+				url('icon-font/icomoon-solid.woff') format('woff');
+			font-weight: 700;
+			font-style: normal;
+			font-display: block;
+		}
+
+		[data-icon]::before {
+			/* use !important to prevent issues with browser extensions that change fonts */
+			font-family: 'icon-font' !important;
+			speak: never;
+			font-style: normal;
+			font-weight: normal;
+			font-variant: normal;
+			text-transform: none;
+			line-height: 1;
+
+			/* Enable Ligatures ================ */
+			letter-spacing: 0;
+			-webkit-font-feature-settings: "liga";
+			-moz-font-feature-settings: "liga=1";
+			-moz-font-feature-settings: "liga";
+			-ms-font-feature-settings: "liga" 1;
+			font-feature-settings: "liga";
+			-webkit-font-variant-ligatures: discretionary-ligatures;
+			font-variant-ligatures: discretionary-ligatures;
+
+			/* Better Font Rendering =========== */
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+
+		[data-icon]::before {
+			content: "^" attr(data-icon) "$";
+
+			font-size: calc(var(--icon-height, 24) * 1px);
+			-webkit-text-stroke: var(--icon-stroke);
+		}
+		[data-icon-variant="16-solid"]::before {
+			font-weight: 700;
 		}
 
 		/* demo styles */
@@ -26,6 +85,17 @@
 		form {
 			float: right;
 		}
+		form output {
+			-webkit-text-stroke: var(--icon-stroke);
+		}
+
+		ul.icons {
+			list-style-type: none;
+		}
+
+		dl dt::after {
+			content: ":";
+		}
 	</style>
 </head>
 
@@ -34,7 +104,25 @@
 		<input type="number" id="size" value="24" min="16" max="82">
 		<label for="size">Icon Größe</label>
 		<button type="submit">Größe verändern</button>
+		<dl hidden>
+			<dt>Stroke width</dt>
+			<dd><output for="size"></output></dd>
+		</dl>
 	</form>
+	<h2>New icon font with ligatures, current stroke: <span class="currentStroke"></span></h2>
+	<ul class="icons">
+		<li data-icon="account" data-icon-variant="20-outline"></li>
+		<li data-icon="add" data-icon-variant="20-outline"></li>
+
+		<li data-icon="warning" data-icon-variant="16-solid"></li>
+		<li data-icon="error" data-icon-variant="16-solid"></li>
+	</ul>
+	<h3>Benefits</h3>
+	<ul>
+		<li>Referencing doesn't need a mapping like when using glyphs, that additionally needs to get in sync in between solid and outline</li>
+		<li>We could set the icons stroke by <code>text-stroke</code> from the outside</li>
+		<li>Instead of using SVGs, referencing these icons assets (fonts vs. SVGs) is much simpler in all of our usecases</li>
+	</ul>
 	<h2>Illustrator</h2>
 	<ol>
 		<li>
@@ -110,8 +198,7 @@
 				</dt>
 				<dd>
 					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-						<use
-							href="regular-converted/Illustrator/24--Arrow-Right--Filled.svg#filled">
+						<use href="regular-converted/Illustrator/24--Arrow-Right--Filled.svg#filled">
 						</use>
 					</svg>
 				</dd>
@@ -119,24 +206,21 @@
 				</dt>
 				<dd>
 					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-						<use
-							href="regular-converted/Illustrator/24--Arrow-Right--Outlined.svg#outlined">
+						<use href="regular-converted/Illustrator/24--Arrow-Right--Outlined.svg#outlined">
 						</use>
 					</svg>
 				</dd>
 				<dt>24--Bug--Filled.svg</dt>
 				<dd>
 					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-						<use
-							href="regular-converted/Illustrator/24--Bug--Filled.svg#filled">
+						<use href="regular-converted/Illustrator/24--Bug--Filled.svg#filled">
 						</use>
 					</svg>
 				</dd>
 				<dt>24--Bug--Outlined.svg</dt>
 				<dd>
 					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-						<use
-							href="regular-converted/Illustrator/24--Bug--Outlined.svg#outlined">
+						<use href="regular-converted/Illustrator/24--Bug--Outlined.svg#outlined">
 						</use>
 					</svg>
 				</dd>
@@ -182,8 +266,7 @@
 				</dt>
 				<dd>
 					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-						<use
-							href="optimized-converted/Illustrator/24--Arrow-Right--Filled.svg#icon">
+						<use href="optimized-converted/Illustrator/24--Arrow-Right--Filled.svg#icon">
 						</use>
 					</svg>
 				</dd>
@@ -191,24 +274,21 @@
 				</dt>
 				<dd>
 					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-						<use
-							href="optimized-converted/Illustrator/24--Arrow-Right--Outlined.svg#icon">
+						<use href="optimized-converted/Illustrator/24--Arrow-Right--Outlined.svg#icon">
 						</use>
 					</svg>
 				</dd>
 				<dt>24--Bug--Filled.svg</dt>
 				<dd>
 					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-						<use
-							href="optimized-converted/Illustrator/24--Bug--Filled.svg#icon">
+						<use href="optimized-converted/Illustrator/24--Bug--Filled.svg#icon">
 						</use>
 					</svg>
 				</dd>
 				<dt>24--Bug--Outlined.svg</dt>
 				<dd>
 					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-						<use
-							href="optimized-converted/Illustrator/24--Bug--Outlined.svg#icon">
+						<use href="optimized-converted/Illustrator/24--Bug--Outlined.svg#icon">
 						</use>
 					</svg>
 				</dd>
@@ -284,32 +364,28 @@
 				<dt>24--Arrow-Right--Filled.svg</dt>
 				<dd>
 					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-						<use
-							href="regular-converted/Sketch/24--Arrow-Right--Filled.svg#3">
+						<use href="regular-converted/Sketch/24--Arrow-Right--Filled.svg#3">
 						</use>
 					</svg>
 				</dd>
 				<dt>24--Arrow-Right--Outlined.svg</dt>
 				<dd>
 					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-						<use
-							href="regular-converted/Sketch/24--Arrow-Right--Outlined.svg#3">
+						<use href="regular-converted/Sketch/24--Arrow-Right--Outlined.svg#3">
 						</use>
 					</svg>
 				</dd>
 				<dt>24--Bug--Filled.svg</dt>
 				<dd>
 					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-						<use
-							href="regular-converted/Sketch/24--Bug--Filled.svg#3">
+						<use href="regular-converted/Sketch/24--Bug--Filled.svg#3">
 						</use>
 					</svg>
 				</dd>
 				<dt>24--Bug--Outlined.svg</dt>
 				<dd>
 					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-						<use
-							href="regular-converted/Sketch/24--Bug--Outlined.svg#3">
+						<use href="regular-converted/Sketch/24--Bug--Outlined.svg#3">
 						</use>
 					</svg>
 				</dd>
@@ -353,32 +429,28 @@
 				<dt>24--Arrow-Right--Filled.svg</dt>
 				<dd>
 					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-						<use
-							href="optimized-converted/Sketch/24--Arrow-Right--Filled.svg#icon">
+						<use href="optimized-converted/Sketch/24--Arrow-Right--Filled.svg#icon">
 						</use>
 					</svg>
 				</dd>
 				<dt>24--Arrow-Right--Outlined.svg</dt>
 				<dd>
 					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-						<use
-							href="optimized-converted/Sketch/24--Arrow-Right--Outlined.svg#icon">
+						<use href="optimized-converted/Sketch/24--Arrow-Right--Outlined.svg#icon">
 						</use>
 					</svg>
 				</dd>
 				<dt>24--Bug--Filled.svg</dt>
 				<dd>
 					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-						<use
-							href="optimized-converted/Sketch/24--Bug--Filled.svg#icon">
+						<use href="optimized-converted/Sketch/24--Bug--Filled.svg#icon">
 						</use>
 					</svg>
 				</dd>
 				<dt>24--Bug--Outlined.svg</dt>
 				<dd>
 					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-						<use
-							href="optimized-converted/Sketch/24--Bug--Outlined.svg#icon">
+						<use href="optimized-converted/Sketch/24--Bug--Outlined.svg#icon">
 						</use>
 					</svg>
 				</dd>
@@ -388,7 +460,8 @@
 
 	<dl>
 		<dt>Original</dt>
-		<dd>Original image, only manipulated by removing <code class="language-html">width</code> and <code class="language-html">height</code> attributes from
+		<dd>Original image, only manipulated by removing <code class="language-html">width</code> and <code
+				class="language-html">height</code> attributes from
 			within the SVG file. So those are scaling linear and even also don't have the
 			<code class="language-html">vector-effect="non-scaling-stroke"</code>-attribute defined within.
 		</dd>
@@ -407,12 +480,24 @@
 	</dl>
 
 	<script>
+		const outputSize = document.querySelector('output[for="size"]');
+
+		document.querySelector('dl[hidden]').hidden = false;
+
+		// initial text-stroke calculation
+		outputSize.textContent = getComputedStyle(outputSize).getPropertyValue('-webkit-text-stroke-width');
+
 		document.querySelector('form button').hidden = true;
 		document.querySelector('form').addEventListener('submit', event => {
 			event.preventDefault();
 		});
 		document.querySelector('form input').addEventListener('change', event => {
 			document.documentElement.style.setProperty("--icon-height", event.target.value);
+			const outputSize = document.querySelector('output[for="size"]');
+
+			console.log(outputSize, getComputedStyle(outputSize), getComputedStyle(outputSize).getPropertyValue('-webkit-text-stroke-width'));
+
+			outputSize.textContent = getComputedStyle(outputSize).getPropertyValue('-webkit-text-stroke-width');
 		});
 	</script>
 </body>
