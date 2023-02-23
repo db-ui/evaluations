@@ -16,8 +16,10 @@
 
 		/* Formula for scaling the icons stroke */
 		:root {
-			--stroke-width: calc((var(--icon-height, 24) / 16 + 0.5) * 24 / var(--icon-height, 24));
-			--icon-stroke: calc(var(--stroke-width) * 1px);
+			--stroke-width-outline: calc((var(--icon-height, 24) / 16 + 0.5) * 24 / var(--icon-height, 24));
+			--stroke-width-solid: calc((var(--icon-height, 24) / 16 + 0.5) * 24 / var(--icon-height, 24));
+			--icon-stroke-outline: calc(var(--stroke-width-outline) * 1px);
+			--icon-stroke-solid: calc(var(--stroke-width-solid) * 1px);
 		}
 
 		/* icon font styles */
@@ -69,9 +71,11 @@
 			content: "^" attr(data-icon) "$";
 
 			font-size: calc(var(--icon-height, 24) * 1px);
-			-webkit-text-stroke: var(--icon-stroke);
+			-webkit-text-stroke: var(--icon-stroke-outline);
 		}
-		[data-icon-variant="16-solid"]::before {
+		[data-icon-type="solid"]::before {
+			-webkit-text-stroke: var(--icon-stroke-solid);
+			/* Differentiating the icon font referenced by font-weight */
 			font-weight: 700;
 		}
 
@@ -86,8 +90,11 @@
 		form {
 			float: right;
 		}
-		form output {
-			-webkit-text-stroke: var(--icon-stroke);
+		form output#outline {
+			-webkit-text-stroke: var(--icon-stroke-outline);
+		}
+		form output#solid {
+			-webkit-text-stroke: var(--icon-stroke-solid);
 		}
 
 		ul.icons {
@@ -106,17 +113,19 @@
 		<label for="size">Icon Größe</label>
 		<button type="submit">Größe verändern</button>
 		<dl hidden>
-			<dt>Stroke width</dt>
-			<dd><output for="size"></output></dd>
+			<dt>Stroke width outline icons</dt>
+			<dd><output for="size" id="outline"></output></dd>
+			<dt>Stroke width solid icons</dt>
+			<dd><output for="size" id="solid"></output></dd>
 		</dl>
 	</form>
 	<h2>New icon font with ligatures, current stroke algorithm: <span class="currentStroke"></span></h2>
 	<ul class="icons">
-		<li data-icon="account" data-icon-variant="20-outline"></li>
-		<li data-icon="add" data-icon-variant="20-outline"></li>
+		<li data-icon="account" data-icon-type="outline"></li>
+		<li data-icon="add" data-icon-type="outline"></li>
 
-		<li data-icon="warning" data-icon-variant="16-solid"></li>
-		<li data-icon="error" data-icon-variant="16-solid"></li>
+		<li data-icon="warning" data-icon-type="solid"></li>
+		<li data-icon="error" data-icon-type="solid"></li>
 	</ul>
 	<h3>Benefits</h3>
 	<ul>
@@ -481,12 +490,14 @@
 	</dl>
 
 	<script>
-		const outputSize = document.querySelector('output[for="size"]');
+		const outputSizeOutline = document.querySelector('output[for="size"]#outline'),
+			outputSizeSolid = document.querySelector('output[for="size"]#solid');
 
 		document.querySelector('dl[hidden]').hidden = false;
 
 		// initial text-stroke calculation
-		outputSize.textContent = getComputedStyle(outputSize).getPropertyValue('-webkit-text-stroke-width');
+		outputSizeOutline.textContent = getComputedStyle(outputSizeOutline).getPropertyValue('-webkit-text-stroke-width');
+		outputSizeSolid.textContent = getComputedStyle(outputSizeSolid).getPropertyValue('-webkit-text-stroke-width');
 
 		document.querySelector('form button').hidden = true;
 		document.querySelector('form').addEventListener('submit', event => {
@@ -494,11 +505,13 @@
 		});
 		document.querySelector('form input').addEventListener('change', event => {
 			document.documentElement.style.setProperty("--icon-height", event.target.value);
-			const outputSize = document.querySelector('output[for="size"]');
+			// const outputSize = document.querySelector('output[for="size"]');
 
-			console.log(outputSize, getComputedStyle(outputSize), getComputedStyle(outputSize).getPropertyValue('-webkit-text-stroke-width'));
+			console.log(outputSizeOutline, getComputedStyle(outputSizeOutline), getComputedStyle(outputSizeOutline).getPropertyValue('-webkit-text-stroke-width'));
+			console.log(outputSizeSolid, getComputedStyle(outputSizeSolid), getComputedStyle(outputSizeSolid).getPropertyValue('-webkit-text-stroke-width'));
 
-			outputSize.textContent = getComputedStyle(outputSize).getPropertyValue('-webkit-text-stroke-width');
+			outputSizeOutline.textContent = getComputedStyle(outputSizeOutline).getPropertyValue('-webkit-text-stroke-width');
+			outputSizeSolid.textContent = getComputedStyle(outputSizeSolid).getPropertyValue('-webkit-text-stroke-width');
 		});
 	</script>
 </body>
