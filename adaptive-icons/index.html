@@ -14,6 +14,7 @@
 			height: calc(var(--icon-height, 24) * 1px);
 		}
 
+		/* Formula for scaling the icons stroke */
 		:root {
 			--stroke-width: calc((var(--icon-height, 24) / 16 + 0.5) * 24 / var(--icon-height, 24));
 			--icon-stroke: calc(var(--stroke-width) * 1px);
@@ -109,7 +110,7 @@
 			<dd><output for="size"></output></dd>
 		</dl>
 	</form>
-	<h2>New icon font with ligatures, current stroke: <span class="currentStroke"></span></h2>
+	<h2>New icon font with ligatures, current stroke algorithm: <span class="currentStroke"></span></h2>
 	<ul class="icons">
 		<li data-icon="account" data-icon-variant="20-outline"></li>
 		<li data-icon="add" data-icon-variant="20-outline"></li>
