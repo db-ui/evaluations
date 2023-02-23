@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="outlined" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #282d37;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: var(--stroke-width, 2);
+      }
+    </style>
+  </defs>
+  <path id="stroke" class="cls-1" d="M9.788,14.212h4.423m-4.423-3.847h4.423m-3.365,7.693h2.308m-6.731-3.27H3.058l-1.058,1.154m5.096,3.269H3.058l-1.058,1.154m20-4.423l-1.058-1.154h-3.365M6.423,10.365H3.058l-1.058,1.154m20,0l-1.058-1.154h-3.365m4.423,10l-1.058-1.154h-4.038m.673-8.846c0-3.077-2.5-5.577-5.577-5.577s-5.577,2.404-5.577,5.481v6.154c0,3.077,2.5,5.577,5.577,5.577s5.577-2.5,5.577-5.577v-6.058ZM6.519,2c.192,1.346,1.058,2.5,2.5,3.558m5.962,0c1.538-.962,2.308-2.212,2.5-3.558" vector-effect="non-scaling-stroke"/>
+</svg>
