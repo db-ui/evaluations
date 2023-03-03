@@ -1,0 +1,23 @@
+{
+  "name": "adaptive-icons",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "oslllo-svg-fixer": "node node_modules/oslllo-svg-fixer/src/cli.js",
+    "fix-icons": "npm-run-all fix-icons:*",
+    "fix-icons:action": "npm run oslllo-svg-fixer -- -s 'Test-Icons--V5/action' -d 'Test-Icons--V5/action'",
+    "fix-icons:arrow": "npm run oslllo-svg-fixer -- -s 'Test-Icons--V5/arrow' -d 'Test-Icons--V5/arrow'",
+    "fix-icons:editing": "npm run oslllo-svg-fixer -- -s 'Test-Icons--V5/editing' -d 'Test-Icons--V5/editing'",
+    "fix-icons:notification": "npm run oslllo-svg-fixer -- -s 'Test-Icons--V5/notification' -d 'Test-Icons--V5/notification'",
+    "fix-icons:payment": "npm run oslllo-svg-fixer -- -s 'Test-Icons--V5/payment' -d 'Test-Icons--V5/payment'"
+  },
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "oslllo-svg-fixer": "^2.2.0"
+  }
+}
