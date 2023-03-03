@@ -35,7 +35,7 @@ for (let iconType of iconTypes) {
       );
     }
 
-    console.log(icons);
+    // console.log(icons);
 
     const builder = new IconFontBuildr({
       sources:
