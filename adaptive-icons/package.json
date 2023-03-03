@@ -11,12 +11,14 @@
     "fix-icons:arrow": "npm run oslllo-svg-fixer -- -s 'Test-Icons--V5/arrow' -d 'Test-Icons--V5/arrow'",
     "fix-icons:editing": "npm run oslllo-svg-fixer -- -s 'Test-Icons--V5/editing' -d 'Test-Icons--V5/editing'",
     "fix-icons:notification": "npm run oslllo-svg-fixer -- -s 'Test-Icons--V5/notification' -d 'Test-Icons--V5/notification'",
-    "fix-icons:payment": "npm run oslllo-svg-fixer -- -s 'Test-Icons--V5/payment' -d 'Test-Icons--V5/payment'"
+    "fix-icons:payment": "npm run oslllo-svg-fixer -- -s 'Test-Icons--V5/payment' -d 'Test-Icons--V5/payment'",
+    "generate-icons": "node icon-font.mjs"
   },
   "author": "",
   "license": "ISC",
   "private": true,
   "devDependencies": {
+    "icon-font-buildr": "^2.0.0",
     "npm-run-all": "^4.1.5",
     "oslllo-svg-fixer": "^2.2.0"
   }
