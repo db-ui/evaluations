@@ -1,0 +1,15 @@
+.centered {
+    width: 80%;
+    max-width: 90em;
+    margin: 0 auto;
+}
+
+.inputs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+nav li + li {
+    margin-top: 0.5em;
+}
