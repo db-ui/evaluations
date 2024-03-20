@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Setting files for IntelliJ / WebStorm
+.idea/

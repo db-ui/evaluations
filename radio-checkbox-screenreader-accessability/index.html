@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test(a11y)</title>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="stylesheet" href="/styles/db-ui-42-absolute.css">
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body class="db-ui-regular">
+<header class="centered">
+    <h1>test(a11y)</h1>
+    <p><strong>radio-buttons & checkboxes</strong></p>
+    <p>
+        Label is being announced twice for Radio and Checkbox elements.
+        <a class="db-link" data-content="external" target="_blank" href="https://github.com/db-ui/mono/issues/2037">
+            Github Issue
+        </a>
+    </p>
+</header>
+
+<div class="db-divider"></div>
+
+<main class="centered">
+    <nav>
+        <ul>
+            <li>
+                <strong>Status Quo</strong>
+            </li>
+            <li>
+                <a class="db-link" href="pages/status-quo-radio-buttons.html" data-content="internal">
+                    Radio Buttons
+                </a>
+            </li>
+            <li>
+                <a class="db-link" href="pages/status-quo-checkboxes.html" data-content="internal">
+                    Checkboxes
+                </a>
+            </li>
+            <li>
+                <div class="db-divider"></div>
+            </li>
+            <li>
+                <strong>Using "aria-label"</strong>
+            </li>
+            <li>
+                <a class="db-link" href="pages/aria-label-nested-radio-buttons.html" data-content="internal">
+                    Radio Buttons: <i>label > input</i>
+                </a>
+            </li>
+            <li>
+                <a class="db-link" href="pages/aria-label-siblings-radio-buttons.html" data-content="internal">
+                    Radio Buttons: <i>input + label</i>
+                </a>
+            </li>
+            <li>
+                <div class="db-divider"></div>
+            </li>
+            <li>
+                <strong>Using "aria-labelled-by"</strong>
+            </li>
+            <li>
+                <a class="db-link" href="pages/aria-labelledby-nested-radio-buttons.html" data-content="internal">
+                    Radio Buttons: <i>label > input</i>
+                </a>
+            </li>
+            <li>
+                <a class="db-link" href="pages/aria-labelledby-siblings-radio-buttons.html" data-content="internal">
+                    Radio Buttons: <i>input + label</i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</main>
+</body>
+</html>
