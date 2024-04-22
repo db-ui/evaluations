@@ -5,11 +5,11 @@ inputs:
   nodeModulesPath:
     description: "Path for node_modules"
     required: false
-    default: "./screen-reader-test/node_modules"
+    default: "**node_modules"
   packageLockPath:
     description: "Path for package-lock.json"
     required: false
-    default: "./screen-reader-test/package-lock.json"
+    default: "**/package-lock.json"
   nodeVersion:
     description: "Node version"
     required: false
@@ -32,7 +32,6 @@ runs:
 
     - name: 🆒 Init Cache
       uses: actions/cache@v4
-      working-directory: screen-reader-test
       id: "cache"
       with:
         path: ${{ inputs.nodeModulesPath }}
@@ -41,7 +40,6 @@ runs:
           ${{ runner.os }}-node-${{ inputs.nodeVersion }}
 
     - name: ⏬ NPM ci
-      working-directory: screen-reader-test
       shell: bash
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
