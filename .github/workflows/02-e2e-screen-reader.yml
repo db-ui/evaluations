@@ -20,9 +20,6 @@ jobs:
       - name: ⏬ Checkout repo
         uses: actions/checkout@v4
 
-      - name: 🔄 Init Cache
-        uses: ./.github/actions/npm-cache
-
       - name: 🔄 Init Playwright
         uses: ./.github/actions/playwright-cache
         with:
