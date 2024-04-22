@@ -4,6 +4,12 @@ description: "Initialize Playwright Cache"
 runs:
   using: "composite"
   steps:
+    - name: 🆙 Setup node
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.nodeVersion }}
+        cache-dependency-path: screen-reder-test/package-lock.json
+
     - name: 🆙 Set env for os
       shell: bash
       env:
