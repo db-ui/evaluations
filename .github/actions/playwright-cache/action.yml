@@ -7,7 +7,7 @@ runs:
     - name: 🆙 Setup node
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ inputs.nodeVersion }}
+        node-version: 20
         cache-dependency-path: screen-reader-test/package-lock.json
 
     - name: 🆙 Set env for os
