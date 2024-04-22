@@ -9,7 +9,6 @@ const config: PlaywrightTestConfig = {
 	snapshotPathTemplate: '{snapshotDir}/{testFileDir}/{arg}/{testName}{ext}',
 	snapshotDir: './screen-reader/windows/__snapshots__',
 	timeout: 3 * 60 * 1000,
-	retries: 2,
 	projects: [
 		{
 			name: 'chromium',

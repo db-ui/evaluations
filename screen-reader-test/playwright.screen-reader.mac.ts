@@ -7,7 +7,6 @@ const config: PlaywrightTestConfig = {
 	reportSlowTests: null,
 	testDir: './screen-reader/macos',
 	timeout: 3 * 60 * 1000,
-	retries: 2,
 	projects: [
 		{
 			name: 'webkit',

@@ -12,6 +12,7 @@
   "devDependencies": {
     "@guidepup/playwright": "^0.13.2",
     "@playwright/test": "1.43.1",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "http-server": "14.1.1"
   }
 }

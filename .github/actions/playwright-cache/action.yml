@@ -16,23 +16,23 @@ runs:
         OS: ${{ runner.os }}
       run: |
         if [[ $OS == "Windows" ]]; then
-            echo "PATH=C:\Users\runneradmin\AppData\Local\ms-playwright" >> "$GITHUB_ENV"
             echo "BROWSER=chromium" >> "$GITHUB_ENV"
         else
-            echo "PATH=~/Library/Caches/ms-playwright" >> "$GITHUB_ENV"
             echo "BROWSER=webkit" >> "$GITHUB_ENV"
         fi
 
     - name: 🆒 Cache Playwright binaries
       uses: actions/cache@v4
-      id: cache-playwright
+      id: playwright-cache
       with:
-        path: ${{ env.PATH }}
-        key: ${{ runner.os }}-playwright-${{ hashFiles('**/package-lock.json') }}
+        path: '~/.cache/ms-playwright'
+        key: '${{ runner.os }}-playwright-1.43.1'
+        restore-keys: |
+            ${{ runner.os }}-playwright-
 
-    - name: ⏬ Install Playwright Browsers
+    - name: Install Playwright's dependencies
       shell: bash
-      working-directory: screen-reader-test
-      if: steps.cache-playwright.outputs.cache-hit != 'true'
-      run: |
-        npx playwright install --with-deps ${{ env.BROWSER }}
+      if: steps.playwright-cache.outputs.cache-hit != 'true'
+      run: npx playwright install --with-deps ${{ env.BROWSER }}
+
+
