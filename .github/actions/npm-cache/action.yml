@@ -21,7 +21,7 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.nodeVersion }}
-        cache-dependency-path: screen-reder-test/package-lock.json
+        cache-dependency-path: screen-reader-test/package-lock.json
 
     - name: Display node and npm version
       shell: bash
