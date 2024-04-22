@@ -1,0 +1,17 @@
+{
+  "name": "screen-reader-test",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "preview": "npx http-server .",
+    "test:screen-reader:windows-latest": "cross-env showcase=react-showcase npx playwright test --config=./playwright.screen-reader.win.ts"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@guidepup/playwright": "^0.13.2",
+    "@playwright/test": "1.43.1",
+    "cross-env": "^7.0.3"
+  }
+}

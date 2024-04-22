@@ -1,0 +1,1 @@
+["(Default) Text, Schalter","Icon and Text, Schalter","Icon, Schalter"]

@@ -1,0 +1,31 @@
+---
+name: "Playwright Cache Action"
+description: "Initialize Playwright Cache"
+runs:
+  using: "composite"
+  steps:
+    - name: 🆙 Set env for os
+      shell: bash
+      env:
+        OS: ${{ runner.os }}
+      run: |
+        if [[ $OS == "windows-latest" ]]; then
+            echo "PATH=C:\Users\runneradmin\AppData\Local\ms-playwright" >> "$GITHUB_ENV"
+            echo "BROWSER=chromium" >> "$GITHUB_ENV"
+        else
+            echo "PATH=~/Library/Caches/ms-playwright" >> "$GITHUB_ENV"
+            echo "BROWSER=webkit" >> "$GITHUB_ENV"
+        fi
+
+    - name: 🆒 Cache Playwright binaries
+      uses: actions/cache@v4
+      id: cache-playwright
+      with:
+        path: ${{ env.PATH }}
+        key: ${{ runner.os }}-playwright-${{ hashFiles('./screen-reader-test/package-lock.json') }}
+
+    - name: ⏬ Install Playwright Browsers
+      shell: bash
+      if: steps.cache-playwright.outputs.cache-hit != 'true'
+      run: |
+        npx playwright install --with-deps ${{ env.BROWSER }}

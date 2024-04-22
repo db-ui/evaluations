@@ -1,0 +1,27 @@
+---
+name: Default Pipeline
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  init:
+    uses: ./.github/workflows/00-init.yml
+
+  init-playwright:
+    uses: ./.github/workflows/00-init-playwright.yml
+
+  get-playwright-version:
+    uses: ./.github/workflows/01-get-playwright-version.yml
+    needs: [init]
+
+
+  test-screen-reader:
+    uses: ./.github/workflows/02-e2e-screen-reader.yml
+    needs: [init-playwright, get-playwright-version]
+    with:
+      version: ${{ needs.get-playwright-version.outputs.version }}
+
