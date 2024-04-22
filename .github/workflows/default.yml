@@ -8,10 +8,6 @@ on:
       - "main"
 
 jobs:
-  init-playwright:
-    uses: ./.github/workflows/00-init-playwright.yml
-
   test-screen-reader:
     uses: ./.github/workflows/02-e2e-screen-reader.yml
-    needs: [init-playwright]
 

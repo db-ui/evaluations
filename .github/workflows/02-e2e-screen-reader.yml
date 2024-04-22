@@ -23,14 +23,28 @@ jobs:
       - name: 🔄 Init Cache Default
         uses: ./.github/actions/npm-cache
 
-      - name: 🔄 Init Playwright
-        uses: ./.github/actions/playwright-cache
+      - name: 🦮 Guidepup Setup
+        uses: guidepup/setup-action@0.15.3
+        with:
+          record: true
+
+      - name: 🆙 Set env for os
+        shell: bash
+        env:
+          OS: ${{ matrix.os }}
+        run: |
+          if [[ $OS == "windows-latest" ]]; then
+           echo "BROWSER=chromium" >> "$GITHUB_ENV"
+          else
+           echo "BROWSER=webkit" >> "$GITHUB_ENV"
+          fi
 
       - name: 👩‍🔬 Test showcase with Playwright 🎭
         working-directory: screen-reader-test
         env:
           HOME: /root
         run: |
+          npx playwright install --with-deps ${{ env.BROWSER }}
           npm run test:screen-reader:${{ matrix.os }} 
 
       - name: 🆙 Upload test results
