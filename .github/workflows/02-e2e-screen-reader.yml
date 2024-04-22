@@ -2,10 +2,6 @@ name: 🎭 Playwright Screen Reader
 
 on:
   workflow_call:
-    inputs:
-      version:
-        required: true
-        type: string
 
 permissions:
   actions: write
@@ -15,8 +11,6 @@ jobs:
   playwright-screen-reader:
     name: 🧪🎭 - screen-reader - ${{ matrix.os }} - ${{ matrix.framework }}
     runs-on: ${{ matrix.os }}
-    container:
-      image: mcr.microsoft.com/playwright:v${{ inputs.version }}
     strategy:
       fail-fast: false
       matrix:
