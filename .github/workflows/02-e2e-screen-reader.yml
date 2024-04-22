@@ -35,7 +35,7 @@ jobs:
           os: ${{ matrix.os }}
 
       - name: 👩‍🔬 Test showcase with Playwright 🎭
-        working-directory: ./screen-reader-test
+        working-directory: screen-reader-test
         env:
           HOME: /root
         run: |
