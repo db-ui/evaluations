@@ -1,1 +1,1 @@
-["(Default) Text, Schalter","user, Icon and Text, Schalter","user, Icon, Schalter"]
+["(Default) Text, button","Icon and Text, button","Icon, button"]

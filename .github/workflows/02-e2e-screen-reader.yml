@@ -39,12 +39,24 @@ jobs:
            echo "BROWSER=webkit" >> "$GITHUB_ENV"
           fi
 
+
+      - uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: '~/.cache/ms-playwright'
+          key: '${{ runner.os }}-playwright-1.43.1'
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - name: Install Playwright's dependencies
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps ${{ env.BROWSER }}
+
       - name: 👩‍🔬 Test showcase with Playwright 🎭
         working-directory: screen-reader-test
         env:
           HOME: /root
         run: |
-          npx playwright install --with-deps ${{ env.BROWSER }}
           npm run test:screen-reader:${{ matrix.os }} 
 
       - name: 🆙 Upload test results

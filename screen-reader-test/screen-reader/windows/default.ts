@@ -39,8 +39,6 @@ export const testDefault = (
 		await page.waitForTimeout(500);
 
 		let recorder: (() => void) | undefined;
-
-		try {
 			if (process.env.CI) {
 				recorder = windowsRecord(
 					`./test-results/${title}-${Date.now()}.mp4`
@@ -50,12 +48,8 @@ export const testDefault = (
 			await nvda.navigateToWebContent();
 			await testFn(nvda);
 			await postTestFn(nvda);
-		} catch (error) {
-			console.error(error);
-		} finally {
-			await nvda.stop();
-			recorder?.();
-		}
+
+		recorder?.();
 	});
 };
 
