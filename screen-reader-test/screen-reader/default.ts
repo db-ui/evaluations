@@ -45,8 +45,10 @@ export const runTest = async (
   await page.waitForTimeout(500);
 
   let recorder: (() => void) | undefined;
+
   if (process.env.CI) {
     const path = `./test-results/${title}-${Date.now()}.mp4`;
+    console.log("Start recorder", path);
     if (platform() === "win32") {
       recorder = windowsRecord(path);
     } else {
@@ -54,15 +56,14 @@ export const runTest = async (
     }
   }
 
-  try {
-    await screenReader.navigateToWebContent();
-    await testFn(screenReader);
-    await postTestFn(screenReader);
-  } catch (e) {
-    console.error(e);
-  } finally {
-    recorder?.();
-  }
+  await screenReader.navigateToWebContent();
+  console.log("screenReader did: navigateToWebContent");
+  await testFn(screenReader);
+  console.log("screenReader did: testFn");
+  await postTestFn(screenReader);
+  console.log("screenReader did: postTestFn");
+  recorder?.();
+  console.log("Stop recorder");
 };
 
 export const testDefault = (
@@ -82,7 +83,9 @@ export const testDefault = (
   ) => Promise<void> = async (nvda: any) => generateSnapshot(nvda),
   additionalParams = "&color=neutral-bg-lvl-1&density=regular",
 ) => {
-  if (platform() === "win32") {
+  const os = platform();
+  console.log("Running test for", os);
+  if (os === "win32") {
     test(title, async ({ page, nvda }) => {
       await runTest(
         title,

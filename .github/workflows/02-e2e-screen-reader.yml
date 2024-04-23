@@ -47,7 +47,7 @@ jobs:
         uses: actions/cache@v4
         id: playwright-cache
         with:
-          path: "~/.cache/ms-playwright"
+          path: ${{ env.PATH }}
           key: "${{ runner.os }}-playwright-1.43.1"
           restore-keys: |
             ${{ runner.os }}-playwright-
