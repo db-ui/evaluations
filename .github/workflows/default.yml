@@ -7,6 +7,10 @@ on:
     branches:
       - "main"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test-screen-reader:
     uses: ./.github/workflows/02-e2e-screen-reader.yml

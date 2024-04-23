@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "preview": "npx http-server .",
+    "test:screen-reader:macos-latest": "cross-env showcase=react-showcase npx playwright test --config=./playwright.screen-reader.mac.ts",
     "test:screen-reader:windows-latest": "cross-env showcase=react-showcase npx playwright test --config=./playwright.screen-reader.win.ts"
   },
   "dependencies": {

@@ -14,8 +14,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest]
+        os: [macos-latest, windows-latest]
         framework: [react]
+        shardIndex: [1, 2]
+        shardTotal: [2]
     steps:
       - name: ⏬ Checkout repo
         uses: actions/checkout@v4
@@ -35,13 +37,14 @@ jobs:
         run: |
           if [[ $OS == "windows-latest" ]]; then
             echo "PATH=C:\Users\runneradmin\AppData\Local\ms-playwright" >> "$GITHUB_ENV"
-            echo "BROWSER=chromium" >> "$GITHUB_ENV"
+            echo "BROWSER=chromium firefox" >> "$GITHUB_ENV"
           else
             echo "PATH=~/Library/Caches/ms-playwright" >> "$GITHUB_ENV"
-            echo "BROWSER=webkit" >> "$GITHUB_ENV"
+            echo "BROWSER=webkit chromium firefox" >> "$GITHUB_ENV"
           fi
 
-      - uses: actions/cache@v4
+      - name: 🔄 Init Cache Playwright
+        uses: actions/cache@v4
         id: playwright-cache
         with:
           path: "~/.cache/ms-playwright"
@@ -61,12 +64,12 @@ jobs:
         env:
           HOME: /root
         run: |
-          npm run test:screen-reader:${{ matrix.os }}
+          npm run test:screen-reader:${{ matrix.os }} -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
       - name: 🆙 Upload test results
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.framework }}-screen-reader-${{ matrix.os }}
+          name: ${{ matrix.framework }}-screen-reader-${{ matrix.os }}-${{ matrix.shardIndex }}
           path: ./screen-reader-test/${{ matrix.framework }}-showcase/test-results
           retention-days: 30

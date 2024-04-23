@@ -1,19 +1,15 @@
-import { screenReaderConfig } from '@guidepup/playwright';
-import { devices, type PlaywrightTestConfig } from '@playwright/test';
-import showcaseConfig from './playwright.showcase';
+import { devices, type PlaywrightTestConfig } from "@playwright/test";
+import defaultScreenReaderConfig from "./playwright.screen-reader";
 
 const config: PlaywrightTestConfig = {
-	...screenReaderConfig,
-	reportSlowTests: null,
-	testDir: './screen-reader/macos',
-	timeout: 3 * 60 * 1000,
-	projects: [
-		{
-			name: 'webkit',
-			use: { ...devices['Desktop Safari'], headless: false }
-		}
-	],
-	...showcaseConfig
+  ...defaultScreenReaderConfig,
+  snapshotPathTemplate: "{snapshotDir}/{testFileDir}/macos/{projectName}/{arg}/{testName}{ext}",
+  projects: [
+    {
+      name: "webkit",
+      use: { ...devices["Desktop Safari"], headless: false },
+    },
+  ],
 };
 
 export default config;
