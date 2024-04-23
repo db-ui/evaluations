@@ -36,10 +36,8 @@ jobs:
           OS: ${{ matrix.os }}
         run: |
           if [[ $OS == "windows-latest" ]]; then
-            echo "PATH=C:\Users\runneradmin\AppData\Local\ms-playwright" >> "$GITHUB_ENV"
             echo "BROWSER=chromium" >> "$GITHUB_ENV"
           else
-            echo "PATH=~/Library/Caches/ms-playwright" >> "$GITHUB_ENV"
             echo "BROWSER=webkit" >> "$GITHUB_ENV"
           fi
 
@@ -61,8 +59,6 @@ jobs:
 
       - name: 👩‍🔬 Test showcase with Playwright 🎭
         working-directory: screen-reader-test
-        env:
-          HOME: /root
         run: |
           npx --loglevel=verbose playwright install --with-deps ${{ env.BROWSER }}
           npm run test:screen-reader:${{ matrix.os }} -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
