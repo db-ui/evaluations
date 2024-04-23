@@ -50,9 +50,9 @@ export const runTest = async (
     const path = `./test-results/${title}-${Date.now()}.mp4`;
     console.log("Start recorder", path);
     if (platform() === "win32") {
-     // recorder = windowsRecord(path);
+      recorder = windowsRecord(path);
     } else {
-      //recorder = macOSRecord(path);
+      recorder = macOSRecord(path);
     }
   }
 
@@ -62,7 +62,6 @@ export const runTest = async (
   console.log("screenReader did: testFn");
   await postTestFn(screenReader);
   console.log("screenReader did: postTestFn");
-  await screenReader.stop();
   recorder?.();
   console.log("Stop recorder");
 };
@@ -98,7 +97,7 @@ export const testDefault = (
         postTestFn,
         additionalParams,
       );
-      console.log("Running test", title , "done");
+      console.log("Running test", title, "done");
     });
   } else {
     test(title, async ({ page, voiceOver }) => {
@@ -112,7 +111,7 @@ export const testDefault = (
         postTestFn,
         additionalParams,
       );
-      console.log("Running test", title , "done");
+      console.log("Running test", title, "done");
     });
   }
 };

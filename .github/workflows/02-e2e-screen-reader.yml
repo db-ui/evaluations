@@ -41,26 +41,10 @@ jobs:
             echo "BROWSER=webkit" >> "$GITHUB_ENV"
           fi
 
-#      - name: 🔄 Init Cache Playwright
-#        uses: actions/cache@v4
-#        id: playwright-cache
-#        with:
-#          path: ${{ env.PATH }}
-#          key: "${{ runner.os }}-playwright-1.43.1"
-#          restore-keys: |
-#            ${{ runner.os }}-playwright-
-
-#      - name: Install Playwright's dependencies
-#        if: steps.playwright-cache.outputs.cache-hit != 'true'
-#        run: |
-#          npx playwright install --with-deps ${{ env.BROWSER }}
-#          echo "-------------------"
-#          ls ${{ env.PATH }}
-
       - name: 👩‍🔬 Test showcase with Playwright 🎭
         working-directory: screen-reader-test
         run: |
-          npx --loglevel=verbose playwright install --with-deps ${{ env.BROWSER }}
+          npx playwright install --with-deps ${{ env.BROWSER }}
           npm run test:screen-reader:${{ matrix.os }} -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
       - name: 🆙 Upload test results
