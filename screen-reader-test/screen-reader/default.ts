@@ -62,6 +62,7 @@ export const runTest = async (
   console.log("screenReader did: testFn");
   await postTestFn(screenReader);
   console.log("screenReader did: postTestFn");
+  await screenReader.stop();
   recorder?.();
   console.log("Stop recorder");
 };
