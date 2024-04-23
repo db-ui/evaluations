@@ -34,9 +34,11 @@ jobs:
           OS: ${{ matrix.os }}
         run: |
           if [[ $OS == "windows-latest" ]]; then
-           echo "BROWSER=chromium" >> "$GITHUB_ENV"
+            echo "PATH=C:\Users\runneradmin\AppData\Local\ms-playwright" >> "$GITHUB_ENV"
+            echo "BROWSER=chromium" >> "$GITHUB_ENV"
           else
-           echo "BROWSER=webkit" >> "$GITHUB_ENV"
+            echo "PATH=~/Library/Caches/ms-playwright" >> "$GITHUB_ENV"
+            echo "BROWSER=webkit" >> "$GITHUB_ENV"
           fi
 
 
@@ -50,7 +52,10 @@ jobs:
 
       - name: Install Playwright's dependencies
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps ${{ env.BROWSER }}
+        run: |
+          npx playwright install --with-deps ${{ env.BROWSER }}
+          echo "-------------------"
+          ls $PATH
 
       - name: 👩‍🔬 Test showcase with Playwright 🎭
         working-directory: screen-reader-test
