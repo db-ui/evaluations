@@ -11,8 +11,6 @@ const showcaseConfig: PlaywrightTestConfig = {
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: process.env.CI ? "on-first-retry" : "on",
-    /* Collect trace when retrying the failed test. */
-    video: process.env.CI ? "on-first-retry" : "off",
   },
   webServer: {
     command: `npm run preview`,
