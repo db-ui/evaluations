@@ -80,7 +80,7 @@ export const testDefault = (
   testFn: (screenReader: VoiceOverPlaywright | NVDAPlaywright) => Promise<void>,
   postTestFn: (
     screenReader: VoiceOverPlaywright | NVDAPlaywright,
-  ) => Promise<void> = async (nvda: any) => generateSnapshot(nvda),
+  ) => Promise<void> = async (nvda: any) => await generateSnapshot(nvda),
   additionalParams = "&color=neutral-bg-lvl-1&density=regular",
 ) => {
   const os = platform();

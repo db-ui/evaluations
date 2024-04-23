@@ -11,6 +11,6 @@ test.describe("DBInput", () => {
       await screenReader.press("Shift+Tab");
       await screenReader.press("Tab");
     },
-    async (screenReader) => generateSnapshot(screenReader, true),
+    async (screenReader) => await generateSnapshot(screenReader, true),
   );
 });
