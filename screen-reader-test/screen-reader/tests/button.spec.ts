@@ -1,7 +1,7 @@
 import { nvdaTest as test } from "@guidepup/playwright";
 import { generateSnapshot, testDefault } from "../default";
 
-test.skip("DBButton", () => {
+test.describe("DBButton", () => {
   testDefault(
     test,
     "should not have icon in screen reader",
