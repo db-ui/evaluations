@@ -87,6 +87,7 @@ export const testDefault = (
   console.log("Running test for", os);
   if (os === "win32") {
     test(title, async ({ page, nvda }) => {
+      console.log("Running test", title);
       await runTest(
         title,
         page,
@@ -96,9 +97,11 @@ export const testDefault = (
         postTestFn,
         additionalParams,
       );
+      console.log("Running test", title , "done");
     });
   } else {
     test(title, async ({ page, voiceOver }) => {
+      console.log("Running test", title);
       await runTest(
         title,
         page,
@@ -108,6 +111,7 @@ export const testDefault = (
         postTestFn,
         additionalParams,
       );
+      console.log("Running test", title , "done");
     });
   }
 };
