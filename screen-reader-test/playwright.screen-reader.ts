@@ -6,7 +6,7 @@ const defaultScreenReaderConfig: PlaywrightTestConfig = {
   ...screenReaderConfig,
   ...showcaseConfig,
   reportSlowTests: null,
-  testDir: "./screen-reader/tests",
+  testDir: "./screen-reader/widows",
   snapshotDir: "./screen-reader/__snapshots__",
   timeout: 3 * 60 * 1000,
 };

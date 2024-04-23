@@ -64,7 +64,7 @@ jobs:
         env:
           HOME: /root
         run: |
-          npx playwright install --with-deps ${{ env.BROWSER }} --loglevel=verbose
+          npx --loglevel=verbose playwright install --with-deps ${{ env.BROWSER }}
           npm run test:screen-reader:${{ matrix.os }} -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
       - name: 🆙 Upload test results

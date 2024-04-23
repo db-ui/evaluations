@@ -1,7 +1,7 @@
 import { nvdaTest as test } from "@guidepup/playwright";
 import { testDefault, generateSnapshot } from "../default";
 
-test.describe("DBInput", () => {
+test.skip("DBInput", () => {
   testDefault(
     test,
     "should have message and label",

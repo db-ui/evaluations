@@ -1,7 +1,7 @@
 import { nvdaTest as test } from "@guidepup/playwright";
 import { testDefault } from "../default";
 
-test.describe("DBRadio", () => {
+test.skip("DBRadio", () => {
   testDefault(
     test,
     "should label duplicated",

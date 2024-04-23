@@ -1,14 +1,8 @@
 import { devices, type PlaywrightTestConfig } from "@playwright/test";
-import {screenReaderConfig} from "@guidepup/playwright";
-import showcaseConfig from "./playwright.showcase";
+import defaultScreenReaderConfig from "./playwright.screen-reader";
 
 const config: PlaywrightTestConfig = {
-  ...screenReaderConfig,
-  ...showcaseConfig,
-  reportSlowTests: null,
-  testDir: "./screen-reader/tests",
-  snapshotDir: "./screen-reader/__snapshots__",
-  timeout: 3 * 60 * 1000,
+  ...defaultScreenReaderConfig,
   snapshotPathTemplate:
     "{snapshotDir}/{testFileDir}/windows/{projectName}/{arg}/{testName}{ext}",
   projects: [
