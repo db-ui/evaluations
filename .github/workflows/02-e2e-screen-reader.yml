@@ -37,10 +37,10 @@ jobs:
         run: |
           if [[ $OS == "windows-latest" ]]; then
             echo "PATH=C:\Users\runneradmin\AppData\Local\ms-playwright" >> "$GITHUB_ENV"
-            echo "BROWSER=chromium firefox" >> "$GITHUB_ENV"
+            echo "BROWSER=chromium" >> "$GITHUB_ENV"
           else
             echo "PATH=~/Library/Caches/ms-playwright" >> "$GITHUB_ENV"
-            echo "BROWSER=webkit chromium firefox" >> "$GITHUB_ENV"
+            echo "BROWSER=webkit" >> "$GITHUB_ENV"
           fi
 
       - name: 🔄 Init Cache Playwright

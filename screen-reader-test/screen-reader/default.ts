@@ -50,9 +50,9 @@ export const runTest = async (
     const path = `./test-results/${title}-${Date.now()}.mp4`;
     console.log("Start recorder", path);
     if (platform() === "win32") {
-      recorder = windowsRecord(path);
+     // recorder = windowsRecord(path);
     } else {
-      recorder = macOSRecord(path);
+      //recorder = macOSRecord(path);
     }
   }
 
