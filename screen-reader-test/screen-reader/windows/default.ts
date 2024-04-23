@@ -1,17 +1,17 @@
 /* eslint-disable import/no-anonymous-default-export */
 
-import { windowsRecord } from '@guidepup/guidepup';
-import { expect } from '@playwright/test';
+import { windowsRecord } from "@guidepup/guidepup";
+import { expect } from "@playwright/test";
 
 export const generateSnapshot = async (nvda: any, shiftFirst?: boolean) => {
-	if (!nvda) return;
+  if (!nvda) return;
 
-	const phraseLog: string[] = await nvda.spokenPhraseLog();
-	if (shiftFirst) {
-		phraseLog.shift();
-	}
+  const phraseLog: string[] = await nvda.spokenPhraseLog();
+  if (shiftFirst) {
+    phraseLog.shift();
+  }
 
-	expect(JSON.stringify(phraseLog)).toMatchSnapshot();
+  expect(JSON.stringify(phraseLog)).toMatchSnapshot();
 };
 
 /**
@@ -24,33 +24,31 @@ export const generateSnapshot = async (nvda: any, shiftFirst?: boolean) => {
  * @param additionalParams
  */
 export const testDefault = (
-	test: any,
-	title: string,
-	url: string,
-	testFn: (nvda: any) => Promise<void>,
-	postTestFn: (nvda: any) => Promise<void> = async (nvda: any) =>
-		generateSnapshot(nvda),
-	additionalParams = '&color=neutral-bg-lvl-1&density=regular'
+  test: any,
+  title: string,
+  url: string,
+  testFn: (nvda: any) => Promise<void>,
+  postTestFn: (nvda: any) => Promise<void> = async (nvda: any) =>
+    generateSnapshot(nvda),
+  additionalParams = "&color=neutral-bg-lvl-1&density=regular",
 ) => {
-	test(title, async ({ page, nvda }) => {
-		await page.goto(`${url}${additionalParams}`, {
-			waitUntil: 'networkidle'
-		});
-		await page.waitForTimeout(500);
+  test(title, async ({ page, nvda }) => {
+    await page.goto(`${url}${additionalParams}`, {
+      waitUntil: "networkidle",
+    });
+    await page.waitForTimeout(500);
 
-		let recorder: (() => void) | undefined;
-			if (process.env.CI) {
-				recorder = windowsRecord(
-					`./test-results/${title}-${Date.now()}.mp4`
-				);
-			}
+    let recorder: (() => void) | undefined;
+    if (process.env.CI) {
+      recorder = windowsRecord(`./test-results/${title}-${Date.now()}.mp4`);
+    }
 
-			await nvda.navigateToWebContent();
-			await testFn(nvda);
-			await postTestFn(nvda);
+    await nvda.navigateToWebContent();
+    await testFn(nvda);
+    await postTestFn(nvda);
 
-		recorder?.();
-	});
+    recorder?.();
+  });
 };
 
 export default { testDefault, generateSnapshot };
