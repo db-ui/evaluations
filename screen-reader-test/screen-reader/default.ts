@@ -54,11 +54,15 @@ export const runTest = async (
     }
   }
 
-  await screenReader.navigateToWebContent();
-  await testFn(screenReader);
-  await postTestFn(screenReader);
-
-  recorder?.();
+  try {
+    await screenReader.navigateToWebContent();
+    await testFn(screenReader);
+    await postTestFn(screenReader);
+  } catch (e) {
+    console.error(e);
+  } finally {
+    recorder?.();
+  }
 };
 
 export const testDefault = (

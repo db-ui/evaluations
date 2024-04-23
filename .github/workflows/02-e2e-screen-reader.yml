@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   playwright-screen-reader:
-    name: 🧪🎭 - screen-reader - ${{ matrix.os }} - ${{ matrix.framework }}
+    name: 🧪🎭 - screen-reader - ${{ matrix.os }} - ${{ matrix.framework }} - ${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
