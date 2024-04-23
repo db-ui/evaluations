@@ -1,5 +1,10 @@
 /* eslint-disable import/no-anonymous-default-export */
-
+import {
+  NVDAPlaywright,
+  nvdaTest,
+  VoiceOverPlaywright,
+  voiceOverTest,
+} from "@guidepup/playwright";
 import { macOSRecord, windowsRecord } from "@guidepup/guidepup";
 import {
   expect,
@@ -10,9 +15,17 @@ import {
   PlaywrightWorkerOptions,
   TestType,
 } from "@playwright/test";
-import { NVDAPlaywright, VoiceOverPlaywright } from "@guidepup/playwright";
 
 import { platform } from "os";
+
+export type ScreenReaderTestType = TestType<
+  PlaywrightTestArgs &
+    PlaywrightTestOptions & {
+      nvda?: NVDAPlaywright;
+      voiceOver?: VoiceOverPlaywright;
+    },
+  PlaywrightWorkerArgs & PlaywrightWorkerOptions
+>;
 
 export const generateSnapshot = async (
   screenReader: VoiceOverPlaywright | NVDAPlaywright,
@@ -67,14 +80,7 @@ export const runTest = async (
 };
 
 export const testDefault = (
-  test: TestType<
-    PlaywrightTestArgs &
-      PlaywrightTestOptions & {
-        nvda?: NVDAPlaywright;
-        voiceOver?: VoiceOverPlaywright;
-      },
-    PlaywrightWorkerArgs & PlaywrightWorkerOptions
-  >,
+  test: ScreenReaderTestType,
   title: string,
   url: string,
   testFn: (screenReader: VoiceOverPlaywright | NVDAPlaywright) => Promise<void>,
@@ -116,4 +122,9 @@ export const testDefault = (
   }
 };
 
-export default { testDefault, generateSnapshot };
+export const getTest = (): ScreenReaderTestType => {
+  const os = platform();
+  return os === "win32" ? nvdaTest : voiceOverTest;
+};
+
+export default { testDefault, generateSnapshot, getTest };

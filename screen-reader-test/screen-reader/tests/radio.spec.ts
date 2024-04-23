@@ -1,6 +1,6 @@
-import { nvdaTest as test } from "@guidepup/playwright";
-import { testDefault } from "../default";
+import { getTest, testDefault } from "../default";
 
+const test = getTest();
 test.describe("DBRadio", () => {
   testDefault(
     test,

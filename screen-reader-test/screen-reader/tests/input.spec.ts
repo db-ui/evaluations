@@ -1,6 +1,6 @@
-import { nvdaTest as test } from "@guidepup/playwright";
-import { testDefault, generateSnapshot } from "../default";
+import { generateSnapshot, getTest, testDefault } from "../default";
 
+const test = getTest();
 test.describe("DBInput", () => {
   testDefault(
     test,
