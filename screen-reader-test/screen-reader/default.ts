@@ -1,15 +1,18 @@
 /* eslint-disable import/no-anonymous-default-export */
+import { platform } from "node:os";
 import {
-  NVDAPlaywright,
+  type NVDAPlaywright,
   nvdaTest,
-  VoiceOverPlaywright,
+  type VoiceOverPlaywright,
   voiceOverTest,
 } from "@guidepup/playwright";
 import { macOSRecord, windowsRecord } from "@guidepup/guidepup";
 import { expect } from "@playwright/test";
-
-import { platform } from "os";
-import { DefaultTestType, RunTestType, ScreenReaderTestType } from "./data";
+import {
+  type DefaultTestType,
+  type RunTestType,
+  type ScreenReaderTestType,
+} from "./data";
 
 const translations: Record<string, string[]> = {
   button: ["Schalter"],
@@ -18,6 +21,8 @@ const translations: Record<string, string[]> = {
   blank: ["Leer"],
   checked: ["aktiviert"],
   " of ": [" von "],
+  clickable: ["anklickbar"],
+  "has auto complete": ["mit Auto Vervollständigung"],
 };
 
 const cleanSpeakInstructions = (phraseLog: string[]): string[] =>
@@ -38,7 +43,7 @@ const cleanSpeakInstructions = (phraseLog: string[]): string[] =>
   );
 
 export const generateSnapshot = async (
-  screenReader: VoiceOverPlaywright | NVDAPlaywright,
+  screenReader?: VoiceOverPlaywright | NVDAPlaywright,
   shiftFirst?: boolean,
 ) => {
   if (!screenReader) return;
@@ -52,11 +57,11 @@ export const generateSnapshot = async (
 
   let snapshot = JSON.stringify(phraseLog);
 
-  Object.entries(translations).map(([key, values]) => {
-    values.forEach((value) => {
+  for (const [key, values] of Object.entries(translations)) {
+    for (const value of values) {
       snapshot = snapshot.replaceAll(value, key);
-    });
-  });
+    }
+  }
 
   expect(snapshot).toMatchSnapshot();
 };
@@ -83,16 +88,15 @@ export const runTest = async ({
     const path = `./${
       process.env.showcase
     }/test-results/${title}-${Date.now()}.mp4`;
-    if (isWin()) {
-      recorder = windowsRecord(path);
-    } else {
-      recorder = macOSRecord(path);
-    }
+    recorder = isWin() ? windowsRecord(path) : macOSRecord(path);
   }
 
-  await (nvda ?? voiceOver).navigateToWebContent();
+  const screenRecorder = nvda ?? voiceOver;
+  if (!screenRecorder) return;
+
   await testFn(voiceOver, nvda);
-  await postTestFn(voiceOver, nvda);
+  await postTestFn?.(voiceOver, nvda);
+  await screenRecorder.stop();
   recorder?.();
 };
 
@@ -107,7 +111,7 @@ export const testDefault = ({
   additionalParams = "&color=neutral-bg-lvl-1&density=regular",
 }: DefaultTestType) => {
   if (isWin()) {
-    test(title, async ({ page, nvda }, testInfo) => {
+    test?.(title, async ({ page, nvda }, testInfo) => {
       await runTest({
         title,
         page,
@@ -120,7 +124,7 @@ export const testDefault = ({
       });
     });
   } else {
-    test(title, async ({ page, voiceOver }, testInfo) => {
+    test?.(title, async ({ page, voiceOver }, testInfo) => {
       await runTest({
         title,
         page,
