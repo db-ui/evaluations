@@ -11,11 +11,11 @@ runs:
       run: |
         if [[ $OS == "Windows" ]]; then
           echo "CACHE_PATH=C:\Users\runneradmin\AppData\Local\ms-playwright" >> "$GITHUB_ENV"
-          echo "BROWSER=chromium" >> "$GITHUB_ENV"
+          echo "BROWSER=chromium firefox" >> "$GITHUB_ENV"
           echo "OS=windows" >> "$GITHUB_ENV"
         else
           echo "CACHE_PATH=~/Library/Caches/ms-playwright" >> "$GITHUB_ENV"
-          echo "BROWSER=webkit" >> "$GITHUB_ENV"
+          echo "BROWSER=webkit chromium firefox" >> "$GITHUB_ENV"
           echo "OS=macos" >> "$GITHUB_ENV"
         fi
 
