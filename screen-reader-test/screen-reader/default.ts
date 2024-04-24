@@ -29,7 +29,8 @@ const cleanSpeakInstructions = (phraseLog: string[]): string[] =>
           !(
             sPhrase.startsWith("You are currently") ||
             sPhrase.startsWith("To enter") ||
-            sPhrase.startsWith("To exit")
+            sPhrase.startsWith("To exit") ||
+            sPhrase.startsWith("To click")
           ),
       )
       .join(". "),
@@ -68,6 +69,7 @@ export const runTest = async ({
   page,
   nvda,
   voiceOver,
+  retry,
 }: DefaultTestType & RunTestType) => {
   await page.goto(`${url}${additionalParams}`, {
     waitUntil: "networkidle",
@@ -76,7 +78,7 @@ export const runTest = async ({
 
   let recorder: (() => void) | undefined;
 
-  if (process.env.CI) {
+  if (process.env.CI && retry > 0) {
     const path = `./${
       process.env.showcase
     }/test-results/${title}-${Date.now()}.mp4`;
@@ -104,7 +106,7 @@ export const testDefault = ({
   additionalParams = "&color=neutral-bg-lvl-1&density=regular",
 }: DefaultTestType) => {
   if (isWin()) {
-    test(title, async ({ page, nvda }) => {
+    test(title, async ({ page, nvda }, testInfo) => {
       await runTest({
         title,
         page,
@@ -113,10 +115,11 @@ export const testDefault = ({
         testFn,
         postTestFn,
         additionalParams,
+        retry: testInfo.retry,
       });
     });
   } else {
-    test(title, async ({ page, voiceOver }) => {
+    test(title, async ({ page, voiceOver }, testInfo) => {
       await runTest({
         title,
         page,
@@ -125,6 +128,7 @@ export const testDefault = ({
         testFn,
         postTestFn,
         additionalParams,
+        retry: testInfo.retry,
       });
     });
   }
