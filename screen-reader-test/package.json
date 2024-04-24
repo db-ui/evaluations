@@ -8,11 +8,10 @@
     "test:screen-reader:macos-latest": "cross-env showcase=react-showcase npx playwright test --config=./playwright.screen-reader.mac.ts",
     "test:screen-reader:windows-latest": "cross-env showcase=react-showcase npx playwright test --config=./playwright.screen-reader.win.ts"
   },
-  "dependencies": {
-  },
   "devDependencies": {
     "@guidepup/playwright": "^0.13.2",
     "@playwright/test": "1.43.1",
+    "@types/node": "^20.12.7",
     "cross-env": "^7.0.3",
     "http-server": "14.1.1"
   }

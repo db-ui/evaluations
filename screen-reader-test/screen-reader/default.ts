@@ -6,10 +6,19 @@ import {
   voiceOverTest,
 } from "@guidepup/playwright";
 import { macOSRecord, windowsRecord } from "@guidepup/guidepup";
-import { expect, Page } from "@playwright/test";
+import { expect } from "@playwright/test";
 
 import { platform } from "os";
 import { DefaultTestType, RunTestType, ScreenReaderTestType } from "./data";
+
+const translations: Record<string, string[]> = {
+  button: ["Schalter"],
+  edit: ["Eingabefeld"],
+  "radio button": ["Auswahlschalter"],
+  blank: ["Leer"],
+  checked: ["aktiviert"],
+  " of ": [" von "],
+};
 
 export const generateSnapshot = async (
   screenReader: VoiceOverPlaywright | NVDAPlaywright,
@@ -22,7 +31,15 @@ export const generateSnapshot = async (
     phraseLog.shift();
   }
 
-  expect(JSON.stringify(phraseLog)).toMatchSnapshot();
+  let snapshot = JSON.stringify(phraseLog);
+
+  Object.entries(translations).map(([key, values]) => {
+    values.forEach((value) => {
+      snapshot = snapshot.replaceAll(value, key);
+    });
+  });
+
+  expect(snapshot).toMatchSnapshot();
 };
 
 export const runTest = async ({
