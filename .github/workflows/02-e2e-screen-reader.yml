@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, windows-latest]
+        os: [macos-13, windows-2022]
         framework: [react]
         shardIndex: [1, 2]
         shardTotal: [2]
@@ -36,7 +36,7 @@ jobs:
       - name: 👩‍🔬 Test showcase with Playwright 🎭
         working-directory: screen-reader-test
         run: |
-          npm run test:screen-reader:${{ matrix.os }} -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+          npm run test:screen-reader:${{ env.OS }} -- --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
 
       - name: 🆙 Upload test results
         if: failure()
@@ -44,12 +44,4 @@ jobs:
         with:
           name: ${{ matrix.framework }}-screen-reader-${{ matrix.os }}-${{ matrix.shardIndex }}
           path: ./screen-reader-test/${{ matrix.framework }}-showcase/test-results
-          retention-days: 30
-
-      - name: 🆙 Upload recordings
-        if: failure() &&  matrix.os == 'macos-latest'
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.framework }}-recordings-${{ matrix.os }}-${{ matrix.shardIndex }}
-          path: ./screen-reader-test/${{ matrix.framework }}/recordings
           retention-days: 30

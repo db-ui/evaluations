@@ -1,11 +1,6 @@
 ---
 name: "Playwright Cache Action"
 description: "Initialize Playwright Cache"
-inputs:
-  nodeVersion:
-    description: "Node version"
-    required: false
-    default: "20"
 runs:
   using: "composite"
   steps:
@@ -17,9 +12,11 @@ runs:
         if [[ $OS == "Windows" ]]; then
           echo "CACHE_PATH=C:\Users\runneradmin\AppData\Local\ms-playwright" >> "$GITHUB_ENV"
           echo "BROWSER=chromium" >> "$GITHUB_ENV"
+          echo "OS=windows" >> "$GITHUB_ENV"
         else
           echo "CACHE_PATH=~/Library/Caches/ms-playwright" >> "$GITHUB_ENV"
           echo "BROWSER=webkit" >> "$GITHUB_ENV"
+          echo "OS=macos" >> "$GITHUB_ENV"
         fi
 
     - name: 🆒 Cache Playwright binaries
