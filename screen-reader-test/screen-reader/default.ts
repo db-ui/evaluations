@@ -102,7 +102,7 @@ export const testDefault = ({
   url,
   testFn,
   postTestFn = async (voiceOver, nvda) => {
-    await generateSnapshot(voiceOver ?? nvda);
+    await generateSnapshot(voiceOver ?? nvda, true);
   },
   additionalParams = "&color=neutral-bg-lvl-1&density=regular",
 }: DefaultTestType) => {

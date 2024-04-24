@@ -16,8 +16,6 @@ test.describe("DBInput", () => {
         await nvda.press("Shift+Tab");
         await nvda.press("Tab");
       }
-    },
-    postTestFn: async (voiceOver, nvda) =>
-      await generateSnapshot(voiceOver ?? nvda, true),
+    }
   });
 });

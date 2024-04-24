@@ -14,7 +14,5 @@ test.describe("DBButton", () => {
       await screenReader.next();
       await screenReader.next();
     },
-    postTestFn: async (voiceOver, nvda) =>
-      await generateSnapshot(voiceOver ?? nvda, true),
   });
 });
