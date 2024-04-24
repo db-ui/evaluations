@@ -60,8 +60,7 @@ export const runTest = async (
   let recorder: (() => void) | undefined;
 
   if (process.env.CI) {
-    const path = `./test-results/${title}-${Date.now()}.mp4`;
-    console.log("Start recorder", path);
+    const path = `./${process.env.showcase}/test-results/${title}-${Date.now()}.mp4`;
     if (platform() === "win32") {
       recorder = windowsRecord(path);
     } else {
@@ -70,13 +69,9 @@ export const runTest = async (
   }
 
   await screenReader.navigateToWebContent();
-  console.log("screenReader did: navigateToWebContent");
   await testFn(screenReader);
-  console.log("screenReader did: testFn");
   await postTestFn(screenReader);
-  console.log("screenReader did: postTestFn");
   recorder?.();
-  console.log("Stop recorder");
 };
 
 export const testDefault = (
@@ -90,10 +85,8 @@ export const testDefault = (
   additionalParams = "&color=neutral-bg-lvl-1&density=regular",
 ) => {
   const os = platform();
-  console.log("Running test for", os);
   if (os === "win32") {
     test(title, async ({ page, nvda }) => {
-      console.log("Running test", title);
       await runTest(
         title,
         page,
@@ -103,11 +96,9 @@ export const testDefault = (
         postTestFn,
         additionalParams,
       );
-      console.log("Running test", title, "done");
     });
   } else {
     test(title, async ({ page, voiceOver }) => {
-      console.log("Running test", title);
       await runTest(
         title,
         page,
@@ -117,7 +108,6 @@ export const testDefault = (
         postTestFn,
         additionalParams,
       );
-      console.log("Running test", title, "done");
     });
   }
 };
