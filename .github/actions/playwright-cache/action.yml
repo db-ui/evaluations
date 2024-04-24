@@ -11,11 +11,11 @@ runs:
       run: |
         if [[ $OS == "Windows" ]]; then
           echo "CACHE_PATH=C:\Users\runneradmin\AppData\Local\ms-playwright" >> "$GITHUB_ENV"
-          echo "BROWSER=chromium firefox" >> "$GITHUB_ENV"
+          echo "BROWSERS=chromium firefox" >> "$GITHUB_ENV"
           echo "OS=windows" >> "$GITHUB_ENV"
         else
           echo "CACHE_PATH=~/Library/Caches/ms-playwright" >> "$GITHUB_ENV"
-          echo "BROWSER=webkit chromium firefox" >> "$GITHUB_ENV"
+          echo "BROWSERS=webkit chromium firefox" >> "$GITHUB_ENV"
           echo "OS=macos" >> "$GITHUB_ENV"
         fi
 
@@ -32,7 +32,4 @@ runs:
       shell: bash
       working-directory: screen-reader-test
       if: steps.playwright-cache.outputs.cache-hit != 'true'
-      run: |
-        npx playwright install --with-deps ${{ env.BROWSER }}
-        echo "----"
-        ls ${{ env.CACHE_PATH }}
+      run: npx playwright install --with-deps ${{ env.BROWSERS }}

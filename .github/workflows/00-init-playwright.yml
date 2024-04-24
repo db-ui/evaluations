@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, windows-latest]
+        os: [macos-13, windows-2022]
     steps:
       - name: ⏬ Checkout repo
         uses: actions/checkout@v4
