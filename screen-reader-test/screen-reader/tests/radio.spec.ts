@@ -1,15 +1,16 @@
-import { getTest, testDefault } from "../default";
+import { generateSnapshot, getTest, testDefault } from "../default";
 
 const test = getTest();
 test.describe("DBRadio", () => {
-  testDefault(
+  testDefault({
     test,
-    "should label duplicated",
-    "./#/03/radio?page=density",
-    async (screenReader) => {
-      await screenReader.press("ArrowLeft");
-      await screenReader.press("ArrowRight");
-      await screenReader.press("ArrowRight");
+    title: "should label duplicated",
+    url: "./#/03/radio?page=density",
+    testFn: async (voiceOver, nvda) => {
+        const screenReader = voiceOver ?? nvda;
+        await screenReader.press("ArrowLeft");
+        await screenReader.press("ArrowRight");
+        await screenReader.press("ArrowRight");
     },
-  );
+  });
 });

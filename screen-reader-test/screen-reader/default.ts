@@ -6,26 +6,10 @@ import {
   voiceOverTest,
 } from "@guidepup/playwright";
 import { macOSRecord, windowsRecord } from "@guidepup/guidepup";
-import {
-  expect,
-  Page,
-  PlaywrightTestArgs,
-  PlaywrightTestOptions,
-  PlaywrightWorkerArgs,
-  PlaywrightWorkerOptions,
-  TestType,
-} from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 
 import { platform } from "os";
-
-export type ScreenReaderTestType = TestType<
-  PlaywrightTestArgs &
-    PlaywrightTestOptions & {
-      nvda?: NVDAPlaywright;
-      voiceOver?: VoiceOverPlaywright;
-    },
-  PlaywrightWorkerArgs & PlaywrightWorkerOptions
->;
+import { DefaultTestType, RunTestType, ScreenReaderTestType } from "./data";
 
 export const generateSnapshot = async (
   screenReader: VoiceOverPlaywright | NVDAPlaywright,
@@ -41,17 +25,16 @@ export const generateSnapshot = async (
   expect(JSON.stringify(phraseLog)).toMatchSnapshot();
 };
 
-export const runTest = async (
-  title: string,
-  page: Page,
-  screenReader: VoiceOverPlaywright | NVDAPlaywright,
-  url: string,
-  testFn: (screenReader: VoiceOverPlaywright | NVDAPlaywright) => Promise<void>,
-  postTestFn: (
-    screenReader: VoiceOverPlaywright | NVDAPlaywright,
-  ) => Promise<void> = async (nvda: any) => generateSnapshot(nvda),
-  additionalParams = "&color=neutral-bg-lvl-1&density=regular",
-) => {
+export const runTest = async ({
+  title,
+  url,
+  testFn,
+  postTestFn,
+  additionalParams,
+  page,
+  nvda,
+  voiceOver,
+}: DefaultTestType & RunTestType) => {
   await page.goto(`${url}${additionalParams}`, {
     waitUntil: "networkidle",
   });
@@ -60,34 +43,35 @@ export const runTest = async (
   let recorder: (() => void) | undefined;
 
   if (process.env.CI) {
-    const path = `./${process.env.showcase}/test-results/${title}-${Date.now()}.mp4`;
-    if (platform() === "win32") {
+    const path = `./${
+      process.env.showcase
+    }/test-results/${title}-${Date.now()}.mp4`;
+    if (isWin()) {
       recorder = windowsRecord(path);
     } else {
       recorder = macOSRecord(path);
     }
   }
 
-  await screenReader.navigateToWebContent();
-  await testFn(screenReader);
-  await postTestFn(screenReader);
+  await (nvda ?? voiceOver).navigateToWebContent();
+  await testFn(voiceOver, nvda);
+  await postTestFn(voiceOver, nvda);
   recorder?.();
 };
 
-export const testDefault = (
-  test: ScreenReaderTestType,
-  title: string,
-  url: string,
-  testFn: (screenReader: VoiceOverPlaywright | NVDAPlaywright) => Promise<void>,
-  postTestFn: (
-    screenReader: VoiceOverPlaywright | NVDAPlaywright,
-  ) => Promise<void> = async (nvda: any) => await generateSnapshot(nvda),
+export const testDefault = ({
+  test,
+  title,
+  url,
+  testFn,
+  postTestFn = async (voiceOver, nvda) => {
+    await generateSnapshot(voiceOver ?? nvda);
+  },
   additionalParams = "&color=neutral-bg-lvl-1&density=regular",
-) => {
-  const os = platform();
-  if (os === "win32") {
+}: DefaultTestType) => {
+  if (isWin()) {
     test(title, async ({ page, nvda }) => {
-      await runTest(
+      await runTest({
         title,
         page,
         nvda,
@@ -95,11 +79,11 @@ export const testDefault = (
         testFn,
         postTestFn,
         additionalParams,
-      );
+      });
     });
   } else {
     test(title, async ({ page, voiceOver }) => {
-      await runTest(
+      await runTest({
         title,
         page,
         voiceOver,
@@ -107,14 +91,14 @@ export const testDefault = (
         testFn,
         postTestFn,
         additionalParams,
-      );
+      });
     });
   }
 };
 
-export const getTest = (): ScreenReaderTestType => {
-  const os = platform();
-  return os === "win32" ? nvdaTest : voiceOverTest;
-};
+const isWin = (): boolean => platform() === "win32";
+
+export const getTest = (): ScreenReaderTestType =>
+  isWin() ? nvdaTest : voiceOverTest;
 
 export default { testDefault, generateSnapshot, getTest };

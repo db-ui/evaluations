@@ -4,7 +4,7 @@ import defaultScreenReaderConfig from "./playwright.screen-reader";
 const config: PlaywrightTestConfig = {
   ...defaultScreenReaderConfig,
   snapshotPathTemplate:
-    "{snapshotDir}/{testFileDir}/windows/{projectName}/{arg}/{testName}{ext}",
+    "{snapshotDir}/{testFileDir}/windows/{projectName}/{testName}{ext}",
   projects: [
     {
       name: "chromium",
