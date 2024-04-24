@@ -30,7 +30,8 @@ const cleanSpeakInstructions = (phraseLog: string[]): string[] =>
             sPhrase.startsWith("You are currently") ||
             sPhrase.startsWith("To enter") ||
             sPhrase.startsWith("To exit") ||
-            sPhrase.startsWith("To click")
+            sPhrase.startsWith("To click") ||
+            sPhrase.startsWith("To select")
           ),
       )
       .join(". "),

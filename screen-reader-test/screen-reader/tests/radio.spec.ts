@@ -7,10 +7,11 @@ test.describe("DBRadio", () => {
     title: "should label duplicated",
     url: "./#/03/radio?page=density",
     testFn: async (voiceOver, nvda) => {
-        const screenReader = voiceOver ?? nvda;
-        await screenReader.press("ArrowLeft");
-        await screenReader.press("ArrowRight");
-        await screenReader.press("ArrowRight");
+      const screenReader = voiceOver ?? nvda;
+      await screenReader.press("Spacebar");
+      await screenReader.press("ArrowLeft");
+      await screenReader.press("ArrowRight");
+      await screenReader.press("ArrowRight");
     },
   });
 });
