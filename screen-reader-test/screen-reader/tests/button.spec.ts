@@ -8,13 +8,11 @@ test.describe("DBButton", () => {
     title: "should not have icon in screen reader",
     url: "./#/02/button?page=content",
     testFn: async (voiceOver, nvda) => {
-      if (voiceOver) {
-      } else {
-        await nvda.press("Tab");
-        await nvda.press("Shift+Tab");
-        await nvda.press("Tab");
-        await nvda.press("Tab");
-      }
+      const screenReader = voiceOver ?? nvda;
+      await screenReader.next();
+      await screenReader.previous();
+      await screenReader.next();
+      await screenReader.next();
     },
     postTestFn: async (voiceOver, nvda) =>
       await generateSnapshot(voiceOver ?? nvda, true),

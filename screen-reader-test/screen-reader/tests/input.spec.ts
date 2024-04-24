@@ -7,12 +7,10 @@ test.describe("DBInput", () => {
     title: "should have message and label",
     url: "./#/03/input?page=variant helper message",
     testFn: async (voiceOver, nvda) => {
-      if (voiceOver) {
-      } else {
-        await nvda.press("Tab");
-        await nvda.press("Shift+Tab");
-        await nvda.press("Tab");
-      }
+      const screenReader = voiceOver ?? nvda;
+      await screenReader.next();
+      await screenReader.previous();
+      await screenReader.next();
     },
     postTestFn: async (voiceOver, nvda) =>
       await generateSnapshot(voiceOver ?? nvda, true),
