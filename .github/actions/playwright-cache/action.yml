@@ -9,12 +9,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: 🆙 Setup node
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ inputs.nodeVersion }}
-        cache-dependency-path: screen-reader-test/package-lock.json
-
     - name: 🆙 Set env for os
       shell: bash
       env:
