@@ -33,7 +33,7 @@ runs:
       uses: actions/cache@v4
       id: "cache"
       with:
-        path: screen-reader-test/node-modules
+        path: "**/node_modules"
         key: ${{ runner.os }}-node-${{ inputs.nodeVersion }}-${{ hashFiles(inputs.packageLockPath) }}
         restore-keys: |
           ${{ runner.os }}-node-${{ inputs.nodeVersion }}
@@ -44,4 +44,4 @@ runs:
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
         npm ci
-        ls screen-reader-test/node-modules
+        ls node-modules
