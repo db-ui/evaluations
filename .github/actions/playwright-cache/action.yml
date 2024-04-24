@@ -41,4 +41,7 @@ runs:
       shell: bash
       working-directory: screen-reader-test
       if: steps.playwright-cache.outputs.cache-hit != 'true'
-      run: npx playwright install --with-deps ${{ env.BROWSER }}
+      run: |
+        npx playwright install --with-deps ${{ env.BROWSER }}
+        echo "----"
+        ls ${{ env.CACHE_PATH }}
