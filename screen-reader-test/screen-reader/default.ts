@@ -20,16 +20,33 @@ const translations: Record<string, string[]> = {
   " of ": [" von "],
 };
 
+const cleanSpeakInstructions = (phraseLog: string[]): string[] =>
+  phraseLog.map((phrase) =>
+    phrase
+      .split(". ")
+      .filter(
+        (sPhrase) =>
+          !(
+            sPhrase.startsWith("You are currently") ||
+            sPhrase.startsWith("To enter") ||
+            sPhrase.startsWith("To exit")
+          ),
+      )
+      .join(". "),
+  );
+
 export const generateSnapshot = async (
   screenReader: VoiceOverPlaywright | NVDAPlaywright,
   shiftFirst?: boolean,
 ) => {
   if (!screenReader) return;
 
-  const phraseLog: string[] = await screenReader.spokenPhraseLog();
+  let phraseLog: string[] = await screenReader.spokenPhraseLog();
   if (shiftFirst) {
     phraseLog.shift();
   }
+
+  phraseLog = cleanSpeakInstructions(phraseLog);
 
   let snapshot = JSON.stringify(phraseLog);
 
