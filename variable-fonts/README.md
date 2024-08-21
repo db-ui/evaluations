@@ -17,7 +17,7 @@ Source: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_fonts/Variable_font
 
 In a naive way I thought: "We have already an icon font, it should be easy to convert it to a variable font" - I was wrong.
 
-First of all if we use for example this [tool](https://github.com/db-ui/gif) we can generate different file types. And it may contain different icon sizes (e.g. 16,24,32) which might look different, with different weights etc.
+First of all if we use for example this [tool](https://github.com/db-ui/gif) we can generate different file types. And it may contain different icon sizes (e.g. 16, 24, 32) which might look different, with different weights etc.
 
 But the biggest problem is that a variable font has a restriction: To interpolate a font glyph, it needs the same amount of points and lines and in the same order. Otherwise, it won't be able to interpolate properly.
 
