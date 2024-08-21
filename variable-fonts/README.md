@@ -8,6 +8,8 @@ Spoiler: At the moment (2024-08-21) there aren't much information about the tech
 
 > Variable fonts are an evolution of the OpenType font specification that enables many different variations of a typeface to be incorporated into a single file.
 
+Source: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_fonts/Variable_fonts_guide
+
 - It is fully supported in all browsers, see [MDNs Variable_fonts_guide](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_fonts/Variable_fonts_guide).
 - In general the font file (.otf/.ttf) contains an additional [table](https://learn.microsoft.com/en-us/typography/opentype/spec/fvar) to enable the variable font.
 
