@@ -2,7 +2,7 @@
 
 This is a repo with information how variable fonts are structured and how to build/use/manipulate them.
 
-Spoiler: At the moment (2024-08-21) there aren't much information about the technical approach. Furthermore, the capabilities of creating it via open source tool is kind of hard.
+Spoiler: At the moment (2024-08-21) there aren't much information about the technical approach. Furthermore, the capabilities of creating it via open source tools is kind of hard.
 
 ## The basics
 
