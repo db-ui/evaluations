@@ -1,0 +1,19 @@
+@font-face {
+  font-family: "test";
+  src: url("test.ttf") format("truetype-variations");
+}
+
+.test {
+  font-family: "test" !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.semi {
+  font-variation-settings: "wght" 750;
+}
+
+.max {
+  font-variation-settings: "wght" 1000;
+}
