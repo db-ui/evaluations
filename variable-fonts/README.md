@@ -23,11 +23,11 @@ But the biggest problem is that a variable font has a restriction: To interpolat
 
 ## The tools
 
-A great place to start is [opentype.js](https://opentype.js.org/). You can check already created variable fonts here. And there is a good JS library behind it. Currently, they don't support writing variable fonts, but there is a [PR](https://github.com/opentypejs/opentype.js/pull/701) for this.
+A great place to start is [opentype.js](https://opentype.js.org/). You can check already created variable fonts here. And there is a good JS library behind it. Currently, they don't support writing variable fonts, but there is a [PR for variable fonts support](https://github.com/opentypejs/opentype.js/pull/701).
 
-## Create own variable font with open source tools
+## Create our own variable font with open source tools
 
-Based on this [video](https://www.youtube.com/watch?v=xoQuWARCUWI) you can create your own variable font with some open source tools. You need those tools:
+Based on a [YouTube video](https://www.youtube.com/watch?v=xoQuWARCUWI) you can create your own variable font with some open source tools. You need those tools:
 
 - [FontForge](https://fontforge.org/)
 - Python Libraries: [fontmake](https://github.com/googlefonts/fontmake)
@@ -42,7 +42,7 @@ Based on this [video](https://www.youtube.com/watch?v=xoQuWARCUWI) you can creat
 4. We use [FontForge](https://fontforge.org/) to open the `test.woff2`
 5. We will save the current font as `.sfd` format like `test.sfd`. Then we change the font name via FontForge settings to something like `test_bold` and save another file as `test_bold.sfd`.
 6. Next we scroll to the bottom of the `test_bold` font inside FontForge and change the positions of the points inside the glyph. In this case we use the empty space between the rectangles to widen them.
-7. After this we will create a font from both the `test.sfd` and `test_bold.sfd` as `.ufo` file. **Warning** the svg might get redrawn by `@db-ui/gif` you may need to fix issues (like the direction) in FontForge by using the "Element/Validation" setting.
+7. After this we will create a font from both the `test.sfd` and `test_bold.sfd` as `.ufo` file. **Warning** the SVG might get redrawn by `@db-ui/gif` you may need to fix issues (like the direction) in FontForge by using the "Element/Validation" setting.
 8. Next we need to create a `.designspace` file. This is a representation (XML) for how the axis works. Check the `test.designspace` for more information.
 9. Now we need to run `fontmake -m test.designspace -o variable --production-names --output-path test.ttf`
 10. Goto [this](https://opentype.js.org/glyph-inspector.html) website and open the `test.ttf`. You should change the `weight` of the icon with the slider provided. You may also see `index.html` and `index.css` to check how you use an axis inside HTML/CSS.
