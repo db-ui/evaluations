@@ -1,0 +1,33 @@
+languagesystem DFLT dflt;
+languagesystem latn dflt;
+
+
+# GSUB 
+
+
+lookup ligaStandardLigatureninLateinischNachschlagetabelle0 {
+  lookupflag 0;
+    sub \t \e \s \t  by \test;
+} ligaStandardLigatureninLateinischNachschlagetabelle0;
+
+feature  RQD {
+
+ script DFLT;
+     language dflt ;
+      lookup ligaStandardLigatureninLateinischNachschlagetabelle0;
+
+ script latn;
+     language dflt ;
+      lookup ligaStandardLigatureninLateinischNachschlagetabelle0;
+}  RQD;
+
+feature liga {
+
+ script DFLT;
+     language dflt ;
+      lookup ligaStandardLigatureninLateinischNachschlagetabelle0;
+
+ script latn;
+     language dflt ;
+      lookup ligaStandardLigatureninLateinischNachschlagetabelle0;
+} liga;

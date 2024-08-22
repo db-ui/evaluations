@@ -105,3 +105,4 @@ dist
 
 # Setting files for IntelliJ / WebStorm
 .idea/
+/variable-fonts/fonts
