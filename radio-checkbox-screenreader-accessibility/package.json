@@ -18,8 +18,5 @@
     "npm-run-all2": "7.0.2",
     "vite": "^5.1.7"
   },
-  "private": true,
-  "overrides": {
-    "cross-spawn": "~7.0.5"
-  }
+  "private": true
 }
