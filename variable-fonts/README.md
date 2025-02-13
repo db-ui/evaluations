@@ -17,7 +17,7 @@ Source: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_fonts/Variable_font
 
 In a naive way I thought: "We have already an icon font, it should be easy to convert it to a variable font" - I was wrong.
 
-First of all if we use for example this [tool](https://github.com/db-ui/gif) we can generate different file types. And it may contain different icon sizes (e.g. 16, 24, 32) which might look different, with different weights etc.
+First of all if we use for example this [tool](https://github.com/db-ux-design-system/icon-font-tools) we can generate different file types. And it may contain different icon sizes (e.g. 16, 24, 32) which might look different, with different weights etc.
 
 But the biggest problem is that a variable font has a restriction: To interpolate a font glyph, it needs the same amount of points and lines and in the same order. Otherwise, it won't be able to interpolate properly.
 
@@ -37,12 +37,12 @@ Based on a [YouTube video](https://www.youtube.com/watch?v=xoQuWARCUWI) you can 
 > You need to go into this directory: `cd variable-fonts`
 
 1. We use a simple `test.svg` with two rectangles as a testing icon.
-2. We run `npx @db-ui/gif --src . --fontName test`
+2. We run `npx @db-ux/icon-font-tools --src . --fontName test`
 3. This will create some font files. For this example we need `fonts/all/test.woff2`
 4. We use [FontForge](https://fontforge.org/) to open the `test.woff2`
 5. We will save the current font as `.sfd` format like `test.sfd`. Then we change the font name via FontForge settings to something like `test_bold` and save another file as `test_bold.sfd`.
 6. Next we scroll to the bottom of the `test_bold` font inside FontForge and change the positions of the points inside the glyph. In this case we use the empty space between the rectangles to widen them.
-7. After this we will create a font from both the `test.sfd` and `test_bold.sfd` as `.ufo` file. **Warning** the SVG might get redrawn by `@db-ui/gif` you may need to fix issues (like the direction) in FontForge by using the "Element/Validation" setting.
+7. After this we will create a font from both the `test.sfd` and `test_bold.sfd` as `.ufo` file. **Warning** the SVG might get redrawn by `@db-ux/icon-font-tools` you may need to fix issues (like the direction) in FontForge by using the "Element/Validation" setting.
 8. Next we need to create a `.designspace` file. This is a representation (XML) for how the axis works. Check the `test.designspace` for more information.
 9. Now we need to run `fontmake -m test.designspace -o variable --production-names --output-path test.ttf`
 10. Goto [this](https://opentype.js.org/glyph-inspector.html) website and open the `test.ttf`. You should change the `weight` of the icon with the slider provided. You may also see `index.html` and `index.css` to check how you use an axis inside HTML/CSS.
