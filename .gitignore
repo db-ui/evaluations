@@ -105,4 +105,5 @@ dist
 
 # Setting files for IntelliJ / WebStorm
 .idea/
+/screen-reader-test/react-showcase/test-results/
 /variable-fonts/fonts
