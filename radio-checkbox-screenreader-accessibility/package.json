@@ -6,14 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "init": "npm-run-all copy:*",
-    "copy:styles": "cpx 'node_modules/@db-ui/components/build/styles/db-ui-42-absolute.css' 'styles/'",
-    "copy:assets": "cpx 'node_modules/@db-ui/components/build/assets/**' 'assets'",
+    "copy:styles": "cpx 'node_modules/@db-ux/core-components/build/styles/absolute.css' 'styles/'",
+    "copy:assets": "cpx 'node_modules/@db-ux/core-components/build/assets/**' 'assets'",
     "dev": "vite --open"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@db-ui/components": "^0.0.68",
+    "@db-ux/core-components": "^0.0.68",
     "cpx2": "^7.0.1",
     "npm-run-all2": "7.0.2",
     "vite": "^5.1.7"
